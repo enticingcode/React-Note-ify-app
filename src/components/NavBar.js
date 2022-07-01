@@ -10,14 +10,10 @@ const NavBar = () => {
                 <p>Note-ify</p>
             </div>
             <NavLink to="/">Home</NavLink>
-            <NavLink to="notes">Notes</NavLink>
+            <NavLink to="Sidebar">Notes</NavLink>
             <NavLink to="contact">Contact</NavLink>
         </nav>
     )
 }
-{/* <Routes>
-                <Route path="" element={<Home />} />
-                <Route path="notes" element={<Notes />} />
-                <Route path="contact" element={<Contact />} />
-            </Routes> */}
+
 export default NavBar

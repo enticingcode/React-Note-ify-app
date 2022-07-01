@@ -1,4 +1,6 @@
 import React from "react"
+import { Outlet } from "react-router-dom"
+import Editor from "./Editor"
 
 export default function Sidebar(props) {
     const noteElements = props.notes.map((note, index) => (
@@ -22,12 +24,18 @@ export default function Sidebar(props) {
     ))
 
     return (
-        <section className="pane sidebar">
-            <div className="sidebar--header">
-                <h3>Notes App</h3>
-                <button className="new-note" onClick={props.newNote}>+</button>
-            </div>
-            {noteElements}
-        </section>
+        <>
+            <section className="pane sidebar">
+                <div className="sidebar--header">
+                    <h3>Notes App</h3>
+                    <button className="new-note" onClick={props.newNote}>+</button>
+                </div>
+                {noteElements}
+            </section>
+            <Editor
+                currentNote={props.currentNote}
+                updateNote={props.updateNote}
+            />
+        </>
     )
 }

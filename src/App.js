@@ -7,6 +7,7 @@ import { nanoid } from "nanoid"
 import { Routes, Route } from "react-router-dom"
 import Home from "./components/Home"
 import NavBar from "./components/NavBar"
+import Contact from "./components/Contact"
 
 
 
@@ -31,7 +32,7 @@ export default function App() {
     function createNewNote() {
         const newNote = {
             id: nanoid(),
-            body: "# Type your markdown note's title here"
+            body: "# Type your notes here!"
         }
         setNotes(prevNotes => [newNote, ...prevNotes])
         setCurrentNoteId(newNote.id)
@@ -69,48 +70,45 @@ export default function App() {
 
     return (
         <main>
-            {
-                notes.length > 0
-                    ?
-                    <Split
-                        sizes={[30, 70]}
-                        direction="horizontal"
-                        className="split"
-                    >
-                        <NavBar />
-                        {
-                            <Sidebar
-                                notes={notes}
-                                currentNote={findCurrentNote()}
-                                setCurrentNoteId={setCurrentNoteId}
-                                newNote={createNewNote}
-                                deleteNote={deleteNote}
-
-                            />
-                        }
-                        {
-                            currentNoteId &&
-                            notes.length > 0 &&
-                            <Editor
-                                currentNote={findCurrentNote()}
-                                updateNote={updateNote}
-                            />
-                        }
-                    </Split>
-                    :
-                    <div className="no-notes">
-                        <h1>Welcome to Note-ify</h1>
-                        <button
-                            className="first-note"
-                            onClick={createNewNote}
-                        >
-                            Start Noting
-                        </button>
+            {notes.length > 0 ?
+                <>
+                    <NavBar />
+                    <div className="content">
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="contact" element={<Contact />} />
+                            <Route path="Sidebar"
+                                element={<Sidebar
+                                    notes={notes}
+                                    currentNote={findCurrentNote()}
+                                    setCurrentNoteId={setCurrentNoteId}
+                                    newNote={createNewNote}
+                                    deleteNote={deleteNote}
+                                    updateNote={updateNote}
+                                />}>
+                            </Route>
+                        </Routes>
                     </div>
+                </>
+                :
+                <div className="no-notes">
+                    <h1>Welcome to Note-ify</h1>
+                    <button
+                        className="first-note"
+                        onClick={createNewNote}
+                    >
+                        Start Noting
+                    </button>
+                </div>
 
             }
-        </main>
+        </main >
 
     )
 }
+
+{/* <Route path="editor" element={<Editor
+    currentNote={findCurrentNote()}
+    updateNote={updateNote}
+/>} /> */}
 

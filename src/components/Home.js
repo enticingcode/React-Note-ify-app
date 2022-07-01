@@ -1,15 +1,12 @@
 import React from 'react'
-import { Routes, Route } from "react-router-dom"
-import Notes from "./Notes"
-import Contact from "./Contact"
 
 const Home = () => {
     return (
-        <div>
-            <h1>helllo home</h1>
+        <div className="homePage">
+            <h1>Welcome to Note-ify</h1>
+            <p>Your first hand resource to noting down the most important tasks, ideas, reminders</p>
         </div>
     )
 }
-
 
 export default Home

@@ -24,8 +24,9 @@ button:focus {
 }
 
 .sidebar {
-    width: 20%;
     height: 100vh;
+    flex: 3;
+    min-width: 300px;
 }
 
 .sidebar--note {
@@ -127,6 +128,7 @@ button:focus {
 
 .split {
     display: flex;
+    height: 100%;
 }
 
 .no-notes {
@@ -203,6 +205,9 @@ button:focus {
 .navbar {
     display: flex;
     flex-direction: column;
+    min-width: 200px;
+    flex: 1;
+    box-shadow: .3px .5px 1px 1px rgb(209, 209, 209);
 }
 
 .navbar>a {
@@ -229,4 +234,18 @@ button:focus {
     align-items: center;
     justify-content: center;
     margin: 40px 0;
+}
+
+main {
+    height: 100vh;
+    display: flex;
+}
+
+.content {
+    flex: 6;
+    display: flex;
+}
+
+.homePage {
+    padding: 30px;
 }
