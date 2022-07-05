@@ -207,20 +207,22 @@ button:focus {
     flex-direction: column;
     min-width: 200px;
     flex: 1;
+    background-color: rgb(245, 245, 204);
     box-shadow: .3px .5px 1px 1px rgb(209, 209, 209);
 }
 
 .navbar>a {
-    /* background-color: #ebd679; */
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
     padding: 20px;
+
 }
 
 .navbar>a:focus {
     border-left: rgb(173, 93, 93) 5px solid;
+    box-shadow: 1px 1px 5px -3px black;
     margin: 6px;
 }
 
@@ -248,4 +250,26 @@ main {
 
 .homePage {
     padding: 30px;
+}
+
+
+.contact--page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.form--inputs {
+    display: flex;
+    flex-wrap: wrap;
+    width: 400px;
+    justify-content: center;
+}
+
+.form--inputs>input,
+textarea {
+    width: 200px;
+    outline: none;
 }
