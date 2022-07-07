@@ -1,8 +1,8 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Navigate, NavLink } from 'react-router-dom'
 import NoteLogo from "../images/note-logo.png"
 
-const NavBar = () => {
+const NavBar = (props) => {
     return (
         <nav className='navbar'>
             <div className="appLogo">
@@ -10,9 +10,9 @@ const NavBar = () => {
                 <p>Note-ify</p>
             </div>
             <NavLink to="/">Home</NavLink>
-            <NavLink to="Sidebar">Notes</NavLink>
-            <NavLink to="contact">Contact</NavLink>
-        </nav>
+            <NavLink to={`/notes/${props.noteTitle}`} >Notes</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
+        </nav >
     )
 }
 

@@ -1,5 +1,5 @@
 import React from "react"
-import Sidebar from "./components/Sidebar"
+import Notes from "./components/Notes"
 import Editor from "./components/Editor"
 import { data } from "./data"
 import Split from "react-split"
@@ -8,11 +8,14 @@ import { Routes, Route } from "react-router-dom"
 import Home from "./components/Home"
 import NavBar from "./components/NavBar"
 import Contact from "./components/Contact"
-
-
-
+import "./App.css"
+import { useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 
 export default function App() {
+
+
+    const navigate = useNavigate();
 
     const [notes, setNotes] = React.useState(
         () => JSON.parse(localStorage.getItem("notes")) || []
@@ -23,10 +26,7 @@ export default function App() {
         (notes[0] && notes[0].id) || ""
     )
 
-    React.useEffect(() => {
-        localStorage.setItem(`notes`, JSON.stringify(notes))
-        console.log(notes);
-    }, [notes])
+    const [noteTitle, setNoteTitle] = React.useState(() => JSON.parse(localStorage.getItem("noteTitle")) || [])
 
 
     function createNewNote() {
@@ -66,29 +66,42 @@ export default function App() {
         })
     }
 
+    React.useEffect(() => {
+        localStorage.setItem(`notes`, JSON.stringify(notes))
+        localStorage.setItem("noteTitle", JSON.stringify(noteTitle))
+        navigate(`notes/${noteTitle}`)
+        console.log(currentNoteId)
+        console.log(noteTitle)
+    }, [notes, noteTitle])
 
 
     return (
         <main>
             {notes.length > 0 ?
                 <>
-                    <NavBar />
+                    <NavBar
+                        noteTitle={noteTitle}
+                    />
                     <div className="content">
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="contact" element={<Contact />} />
-                            <Route path="Sidebar"
-                                element={<Sidebar
+                            <Route path={`notes`}
+                                element={<Notes
                                     notes={notes}
                                     currentNote={findCurrentNote()}
                                     setCurrentNoteId={setCurrentNoteId}
                                     newNote={createNewNote}
                                     deleteNote={deleteNote}
                                     updateNote={updateNote}
+                                    setNoteTitle={setNoteTitle}
                                 />}>
+                                <Route path=":id" element={<Notes />} />
                             </Route>
                         </Routes>
+
                     </div>
+
                 </>
                 :
                 <div className="no-notes">
