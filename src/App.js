@@ -74,11 +74,9 @@ export default function App() {
     React.useEffect(() => {
         localStorage.setItem(`notes`, JSON.stringify(notes))
         navigate(`notes/${noteTitle}`)
-        console.log(notes);
     }, [notes, currentNoteId])
 
     React.useEffect(() => {
-        console.log(noteTitle);
     }, [noteTitle])
 
 
