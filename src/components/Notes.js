@@ -1,12 +1,13 @@
-import React from "react"
+import React, { memo } from "react"
 import Editor from "./Editor"
-
 
 export default function Notes(props) {
 
     const noteElements = props.notes.map((note, index) => {
 
         let noteTitle = note.body.split("\n")[0];
+
+
 
         return (
             <div key={note.id}>
@@ -16,11 +17,13 @@ export default function Notes(props) {
                         }`}
                     onClick={() => {
                         props.setCurrentNoteId(note.id)
-                        props.setNoteTitle(noteTitle)
+                        props.updateNoteTitle(noteTitle)
                     }
                     }
                 >
                     <h4 className="text-snippet">{noteTitle}</h4>
+                    <p>{note.timeStamp}</p>
+                    <p className="description"></p>
                     <button
                         className="delete-btn"
                         // Your onClick event handler here
@@ -53,5 +56,4 @@ export default function Notes(props) {
 }
 
 
-{/* <NavLink to={note.body.split("\n"[0])} /> */ }
 

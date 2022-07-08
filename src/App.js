@@ -11,6 +11,7 @@ import Contact from "./components/Contact"
 import "./App.css"
 import { useNavigate } from "react-router-dom"
 import { useLocation } from "react-router-dom"
+import date from "./components/NewDate"
 
 export default function App() {
 
@@ -26,13 +27,15 @@ export default function App() {
         (notes[0] && notes[0].id) || ""
     )
 
-    const [noteTitle, setNoteTitle] = React.useState(() => JSON.parse(localStorage.getItem("noteTitle")) || [])
-
+    const [noteTitle, setNoteTitle] = React.useState(
+        (notes[0].body.split("\n")[0]) || ""
+    )
 
     function createNewNote() {
         const newNote = {
             id: nanoid(),
-            body: "# Type your notes here!"
+            body: "# Type your notes here!",
+            timeStamp: date,
         }
         setNotes(prevNotes => [newNote, ...prevNotes])
         setCurrentNoteId(newNote.id)
@@ -66,13 +69,17 @@ export default function App() {
         })
     }
 
+
+
     React.useEffect(() => {
         localStorage.setItem(`notes`, JSON.stringify(notes))
-        localStorage.setItem("noteTitle", JSON.stringify(noteTitle))
         navigate(`notes/${noteTitle}`)
-        console.log(currentNoteId)
-        console.log(noteTitle)
-    }, [notes, noteTitle])
+        console.log(notes);
+    }, [notes, currentNoteId])
+
+    React.useEffect(() => {
+        console.log(noteTitle);
+    }, [noteTitle])
 
 
     return (
@@ -80,7 +87,6 @@ export default function App() {
             {notes.length > 0 ?
                 <>
                     <NavBar
-                        noteTitle={noteTitle}
                     />
                     <div className="content">
                         <Routes>
@@ -94,7 +100,7 @@ export default function App() {
                                     newNote={createNewNote}
                                     deleteNote={deleteNote}
                                     updateNote={updateNote}
-                                    setNoteTitle={setNoteTitle}
+                                    updateNoteTitle={setNoteTitle}
                                 />}>
                                 <Route path=":id" element={<Notes />} />
                             </Route>
