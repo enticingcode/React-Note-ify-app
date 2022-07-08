@@ -10,11 +10,11 @@ import NavBar from "./components/NavBar"
 import Contact from "./components/Contact"
 import "./App.css"
 import { useNavigate } from "react-router-dom"
-import { useLocation } from "react-router-dom"
-import date from "./components/NewDate"
+
 
 export default function App() {
 
+    const date = new Date().toLocaleString([], { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
 
     const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ export default function App() {
             for (let i = 0; i < oldNotes.length; i++) {
                 const oldNote = oldNotes[i]
                 if (oldNote.id === currentNoteId) {
-                    newArray.unshift({ ...oldNote, body: text })
+                    newArray.unshift({ ...oldNote, body: text, timeStamp: date })
                 }
                 else newArray.push(oldNote);
             }
