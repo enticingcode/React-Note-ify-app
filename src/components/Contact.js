@@ -21,8 +21,13 @@ const Contact = () => {
 
     }
 
+    function handleSubmit(e) {
+        // e.preventDefault();
+        console.log('yes')
+    }
+
     React.useEffect(() => {
-        console.log(inputData);
+        // console.log(inputData);
     }, [inputData])
 
     return (
@@ -33,27 +38,34 @@ const Contact = () => {
                     <input type='text'
                         placeholder="First Name"
                         onChange={handleChange}
+                        pattern="^[a-zA-Z]+$"
                         name="firstName"
                         value={inputData.firstName}
+                        required
                     >
                     </input>
                     <input type='text'
                         placeholder="Last Name"
                         onChange={handleChange}
+                        pattern="^[a-zA-Z]+$"
                         name="lastName"
                         value={inputData.lastName}
+                        required
                     ></input>
-                    <input type='text'
+                    <input type='tel'
                         placeholder="Phone"
                         onChange={handleChange}
                         name="phone"
+                        pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                         value={inputData.phone}
+                        required
                     ></input>
-                    <input type='text'
+                    <input type='email'
                         placeholder="Email"
                         onChange={handleChange}
                         name="email"
                         value={inputData.email}
+                        required
                     ></input>
                     <textarea
                         placeholder="Comments"
@@ -61,6 +73,7 @@ const Contact = () => {
                         onChange={handleChange}
                         value={inputData.comments
                         }></textarea>
+                    <button onClick={handleSubmit} type='submit'>Submit</button>
                 </div>
             </form >
         </div >
