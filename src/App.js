@@ -28,7 +28,7 @@ export default function App() {
     )
 
     const [noteTitle, setNoteTitle] = React.useState(
-        (notes[0].body.split("\n")[0]) || ""
+        // (notes[0].body.split("\n")[0]) || ""
     )
 
     function createNewNote() {
