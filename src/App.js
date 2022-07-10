@@ -27,9 +27,7 @@ export default function App() {
         (notes[0] && notes[0].id) || ""
     )
 
-    const [noteTitle, setNoteTitle] = React.useState(
-        // (notes[0].body.split("\n")[0]) || ""
-    )
+    const [noteTitle, setNoteTitle] = React.useState([])
 
     function createNewNote() {
         const newNote = {
@@ -73,11 +71,10 @@ export default function App() {
 
     React.useEffect(() => {
         localStorage.setItem(`notes`, JSON.stringify(notes))
+        setNoteTitle(findCurrentNote().body)
         navigate(`notes/${noteTitle}`)
-    }, [notes, currentNoteId])
+    }, [notes, noteTitle, currentNoteId])
 
-    React.useEffect(() => {
-    }, [noteTitle])
 
 
     return (
@@ -98,7 +95,7 @@ export default function App() {
                                     newNote={createNewNote}
                                     deleteNote={deleteNote}
                                     updateNote={updateNote}
-                                    updateNoteTitle={setNoteTitle}
+                                    setNoteTitle={setNoteTitle}
                                 />}>
                                 <Route path=":id" element={<Notes />} />
                             </Route>

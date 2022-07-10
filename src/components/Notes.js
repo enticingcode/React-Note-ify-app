@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import React from "react"
 import Editor from "./Editor"
 
 export default function Notes(props) {
@@ -15,6 +15,7 @@ export default function Notes(props) {
             else return str
         }
 
+
         return (
             <div key={note.id}>
                 <div
@@ -22,7 +23,6 @@ export default function Notes(props) {
                         }`}
                     onClick={() => {
                         props.setCurrentNoteId(note.id)
-                        props.updateNoteTitle(noteTitle)
                     }
                     }
                 >   <div className="note--preview">
@@ -44,6 +44,8 @@ export default function Notes(props) {
         )
     }
     )
+
+
 
     return (
         <>
