@@ -1,24 +1,37 @@
 import React from 'react'
 
-export const SignIn = ({ toggleNewUser }) => {
+export const SignIn = ({ toggleNewUser, handleLogin, userInput, handleInputChange }) => {
 
 
-    function handleLogin(e) {
-        e.preventDefault();
-        console.log('sign in')
-    }
+
 
     return (
         <div className="login--form">
             <h1>Account Login</h1>
             <form className="">
                 <div className="input--fields">
+
                     <label htmlFor="email">Email</label>
-                    <input type='email' id="email" required />
+                    <input
+                        type='email'
+                        id="email"
+                        value={userInput.email}
+                        name="email"
+                        onChange={handleInputChange}
+                        required />
+
                     <label htmlFor="password">Password</label>
-                    <input type='password' id='password' required />
+                    <input
+                        type='password'
+                        id='password'
+                        value={userInput.password}
+                        name="password"
+                        onChange={handleInputChange}
+                        required />
+
                     <button className="login-btn"
-                        onClick={handleLogin}>Login</button>
+                        onClick={(e) => handleLogin(e, userInput.email, userInput.password)}>Login</button>
+
                 </div>
             </form>
             <div className="newUser">

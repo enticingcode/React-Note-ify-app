@@ -13,12 +13,12 @@ import FrontPage from "./components/FrontPage"
 
 export default function App() {
 
+    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
     const date = new Date().toLocaleString([], { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
 
     const navigate = useNavigate();
 
-    const [isLoggedIn, setLoggedIn] = React.useState(false);
 
     const [notes, setNotes] = React.useState(
         () => JSON.parse(localStorage.getItem("notes")) || []
@@ -116,7 +116,10 @@ export default function App() {
                 <div className="content">
                     <Routes>
                         <Route path="/"
-                            element={<FrontPage />}
+                            element={<FrontPage
+                                isLoggedIn={isLoggedIn}
+                                setIsLoggedIn={setIsLoggedIn}
+                            />}
                         />
                     </Routes>
                 </div>

@@ -24,12 +24,30 @@ initializeApp(firebaseConfig);
 const auth = getAuth()
 
 
-const signUp = () => {
-    createUserWithEmailAndPassword(auth, email, password)
+function handleSignUp(e, email, password, confirmPassword) {
+    e.preventDefault();
+    if (confirmPassword != password) {
+        console.log('passwords no match')
+    }
+    else {
+        createUserWithEmailAndPassword(auth, email, password)
+    }
 }
 
-const signIn = () => {
 
+
+function handleLogin(e, email, password) {
+    e.preventDefault();
+    console.log(email, password)
+    const auth = getAuth()
+
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredentials) => {
+            console.log(userCredentials)
+        })
+        .catch((err) => {
+            console.log(err.message)
+        })
 }
 
-export { signUp, signIn } 
+export { auth, handleLogin, handleSignUp } 

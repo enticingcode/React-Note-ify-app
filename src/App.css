@@ -420,6 +420,20 @@ label {
     margin-top: 30px;
 }
 
+.newUser a {
+    margin-left: 5px;
+    color: rgba(38, 51, 95, 0.918);
+    font-weight: bolder;
+}
+
+
+.newUser a:hover {
+    cursor: pointer;
+    color: rgba(51, 69, 129, 0.829);
+}
+
+
+
 @media screen and (max-width: 815px) {
 
     .appLogo>p {
