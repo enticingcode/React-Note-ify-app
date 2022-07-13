@@ -1,8 +1,6 @@
 import React from "react"
 import Notes from "./components/Notes"
 import Editor from "./components/Editor"
-import { data } from "./data"
-import Split from "react-split"
 import { nanoid } from "nanoid"
 import { Routes, Route } from "react-router-dom"
 import Home from "./components/Home"
@@ -10,13 +8,17 @@ import NavBar from "./components/NavBar"
 import Contact from "./components/Contact"
 import "./App.css"
 import { useNavigate } from "react-router-dom"
+import FrontPage from "./components/FrontPage"
 
 
 export default function App() {
 
+
     const date = new Date().toLocaleString([], { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
 
     const navigate = useNavigate();
+
+    const [isLoggedIn, setLoggedIn] = React.useState(false);
 
     const [notes, setNotes] = React.useState(
         () => JSON.parse(localStorage.getItem("notes")) || []
@@ -27,7 +29,7 @@ export default function App() {
         (notes[0] && notes[0].id) || ""
     )
 
-    const [noteTitle, setNoteTitle] = React.useState([])
+    const [noteTitle, setNoteTitle] = React.useState("")
 
     function createNewNote() {
         const newNote = {
@@ -38,6 +40,7 @@ export default function App() {
         setNotes(prevNotes => [newNote, ...prevNotes])
         setCurrentNoteId(newNote.id)
     }
+
 
     function updateNote(text) {
         setNotes(oldNotes => {
@@ -71,21 +74,23 @@ export default function App() {
 
     React.useEffect(() => {
         localStorage.setItem(`notes`, JSON.stringify(notes))
-        setNoteTitle(findCurrentNote().body)
-        navigate(`notes/${noteTitle}`)
-    }, [notes, noteTitle, currentNoteId])
+        // setNoteTitle(findCurrentNote().body)
+        // navigate(`notes/${noteTitle}`)
+    }, [notes, currentNoteId])
 
 
 
     return (
         <main>
-            {notes.length > 0 ?
+
+
+            {isLoggedIn ?
                 <>
                     <NavBar
                     />
                     <div className="content">
                         <Routes>
-                            <Route path="/" element={<Home />} />
+                            <Route path="home" element={<Home />} />
                             <Route path="contact" element={<Contact />} />
                             <Route path={`notes`}
                                 element={<Notes
@@ -99,21 +104,23 @@ export default function App() {
                                 />}>
                                 <Route path=":id" element={<Notes />} />
                             </Route>
+
+
+
                         </Routes>
 
                     </div>
 
                 </>
                 :
-                <div className="no-notes">
-                    <h1>Welcome to Note-ify</h1>
-                    <button
-                        className="first-note"
-                        onClick={createNewNote}
-                    >
-                        Start Noting
-                    </button>
+                <div className="content">
+                    <Routes>
+                        <Route path="/"
+                            element={<FrontPage />}
+                        />
+                    </Routes>
                 </div>
+
 
             }
         </main >

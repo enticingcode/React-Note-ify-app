@@ -32,11 +32,11 @@ const NavBar = (props) => {
                     : logo
                 }
             </div>
-            <NavLink to="/">
+            <NavLink to="home">
                 {showNav ? "Home" : <img src={home} />}
             </NavLink>
 
-            <NavLink to={`/notes/${props.noteTitle}`} >
+            <NavLink to={`/notes`} >
                 {showNav ? "Notes" : <img src={notes} />}
             </NavLink>
 
