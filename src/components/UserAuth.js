@@ -5,15 +5,7 @@ import React from "react"
 
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-    apiKey: "AIzaSyC2KL_C2KpIZSGlDN4kff9uOb-jn9RuKjA",
-    authDomain: "note-ify-be488.firebaseapp.com",
-    projectId: "note-ify-be488",
-    storageBucket: "note-ify-be488.appspot.com",
-    messagingSenderId: "85174083605",
-    appId: "1:85174083605:web:65eab263c0abc2092e2e1c",
-    measurementId: "G-84QR1XJC5Q"
-};
+
 
 initializeApp(firebaseConfig);
 
