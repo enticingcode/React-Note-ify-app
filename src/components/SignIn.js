@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const SignIn = ({ toggleNewUser, handleLogin, userInput, handleInputChange }) => {
+export const SignIn = ({ toggleNewUser, handleSignIn, userInput, handleInputChange }) => {
 
 
 

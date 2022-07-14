@@ -51,3 +51,8 @@ export const SignUp = ({ toggleNewUser, handleSignUp, handleInputChange, userInp
         </div>
     )
 }
+
+
+
+
+

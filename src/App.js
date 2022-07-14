@@ -7,8 +7,10 @@ import Home from "./components/Home"
 import NavBar from "./components/NavBar"
 import Contact from "./components/Contact"
 import "./App.css"
-import { useNavigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import FrontPage from "./components/FrontPage"
+import { SignIn } from "./components/SignIn"
+import { SignUp } from "./components/SignUp"
 
 
 export default function App() {
@@ -17,7 +19,7 @@ export default function App() {
 
     const date = new Date().toLocaleString([], { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
 
     const [notes, setNotes] = React.useState(
@@ -115,12 +117,14 @@ export default function App() {
                 :
                 <div className="content">
                     <Routes>
-                        <Route path="/"
+                        <Route path="/" element={<Navigate to="/frontpage/login" />} />
+                        <Route path="/frontpage/*"
                             element={<FrontPage
                                 isLoggedIn={isLoggedIn}
                                 setIsLoggedIn={setIsLoggedIn}
                             />}
                         />
+                        {/* <Route path="/signup" element={<SignUp />} /> */}
                     </Routes>
                 </div>
 
