@@ -2,12 +2,13 @@ import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } f
 import { initializeApp } from "firebase/app";
 import { Navigate } from "react-router-dom";
 import React from "react"
+import { app } from "../firebase";
 
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 
-initializeApp(firebaseConfig);
+app()
 
 
 const auth = getAuth()
