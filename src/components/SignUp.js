@@ -1,7 +1,9 @@
 import React from 'react'
+import { handleSignUp } from './UserAuth'
 
-export const SignUp = ({ toggleNewUser, handleSignUp, handleInputChange, userInput }) => {
 
+
+export const SignUp = ({ loginToSignUp, handleInputChange, userInput }) => {
 
 
     return (
@@ -46,7 +48,7 @@ export const SignUp = ({ toggleNewUser, handleSignUp, handleInputChange, userInp
             </form>
             <div className="newUser">
                 <p>Already have an account?
-                    <a onClick={toggleNewUser}>Sign in here</a></p>
+                    <a onClick={loginToSignUp}>Sign in here</a></p>
             </div>
         </div>
     )

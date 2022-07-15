@@ -1,19 +1,25 @@
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { Navigate } from "react-router-dom";
-import React from "react"
-import { app } from "../firebase";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth"
 
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// INIT APP HERE FOR FIREBASE
+
+initializeApp({
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+});
+
+//GET AUTH
+const auth = getAuth();
 
 
-app()
 
-
-const auth = getAuth()
-
-
+//HANDLE SIGN UP 
 function handleSignUp(e, email, password, confirmPassword) {
     e.preventDefault();
     if (confirmPassword != password) {
@@ -28,24 +34,20 @@ function handleSignUp(e, email, password, confirmPassword) {
 }
 
 
+// HANDLE LOGIN 
+// function handleLogin(e, email, password) {
+//     e.preventDefault();
+//     console.log(email, password)
+//     const auth = getAuth()
 
-function handleLogin(e, email, password) {
-    e.preventDefault();
-    console.log(email, password)
-    const auth = getAuth()
-
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredentials) => {
-            console.log(userCredentials)
-        })
-        .then(() => {
-            return <Navigate to="home" />
-        })
-        .catch((err) => {
-            console.log(err.message)
-        })
-}
+//     signInWithEmailAndPassword(auth, email, password)
+//         .then((userCredentials) => {
+//             console.log(userCredentials)
+//         })
+//         .catch((err) => {
+//             console.log(err.message)
+//         })
+// }
 
 
-
-export { auth, handleLogin, handleSignUp } 
+export { auth, handleSignUp }

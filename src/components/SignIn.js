@@ -1,9 +1,24 @@
 import React from 'react'
+// import { handleLogin } from './UserAuth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
-export const SignIn = ({ toggleNewUser, handleSignIn, userInput, handleInputChange }) => {
 
+export const SignIn = ({ loginToSignUp, userInput, handleInputChange, setIsLoggedin }) => {
 
+    function handleLogin(e, email, password) {
+        e.preventDefault();
+        console.log(email, password)
+        const auth = getAuth()
 
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredentials) => {
+                console.log(userCredentials)
+                setIsLoggedin(true)
+            })
+            .catch((err) => {
+                console.log(err.message)
+            })
+    }
 
     return (
         <div className="login--form">
@@ -36,7 +51,7 @@ export const SignIn = ({ toggleNewUser, handleSignIn, userInput, handleInputChan
             </form>
             <div className="newUser">
                 <p>Don't have an account?
-                    <a onClick={toggleNewUser}>Sign up Here!</a></p>
+                    <a onClick={loginToSignUp}>Sign up Here!</a></p>
             </div>
         </div>
     )

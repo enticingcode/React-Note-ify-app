@@ -1,16 +1,13 @@
 import React from "react"
 import Notes from "./components/Notes"
-import Editor from "./components/Editor"
 import { nanoid } from "nanoid"
 import { Routes, Route } from "react-router-dom"
 import Home from "./components/Home"
 import NavBar from "./components/NavBar"
 import Contact from "./components/Contact"
 import "./App.css"
-import { Navigate } from "react-router-dom"
+import { useNavigate, Navigate } from "react-router-dom"
 import FrontPage from "./components/FrontPage"
-import { SignIn } from "./components/SignIn"
-import { SignUp } from "./components/SignUp"
 
 
 export default function App() {
@@ -19,7 +16,7 @@ export default function App() {
 
     const date = new Date().toLocaleString([], { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
 
     const [notes, setNotes] = React.useState(
@@ -80,7 +77,9 @@ export default function App() {
         // navigate(`notes/${noteTitle}`)
     }, [notes, currentNoteId])
 
-
+    React.useEffect(() => {
+        console.log(isLoggedIn)
+    }, [isLoggedIn])
 
     return (
         <main>
@@ -92,9 +91,9 @@ export default function App() {
                     />
                     <div className="content">
                         <Routes>
-                            <Route path="home" element={<Home />} />
-                            <Route path="contact" element={<Contact />} />
-                            <Route path={`notes`}
+                            <Route path="/home" element={<Home />} />
+                            <Route path="/home" element={<Contact />} />
+                            <Route path="/notes"
                                 element={<Notes
                                     notes={notes}
                                     currentNote={findCurrentNote()}
@@ -117,14 +116,13 @@ export default function App() {
                 :
                 <div className="content">
                     <Routes>
-                        <Route path="/" element={<Navigate to="/frontpage/login" />} />
-                        <Route path="/frontpage/*"
+                        {/* <Route path="/" element={<Navigate to="/frontpage/login" />} /> */}
+                        <Route path="/*"
                             element={<FrontPage
                                 isLoggedIn={isLoggedIn}
                                 setIsLoggedIn={setIsLoggedIn}
                             />}
                         />
-                        {/* <Route path="/signup" element={<SignUp />} /> */}
                     </Routes>
                 </div>
 
@@ -134,9 +132,4 @@ export default function App() {
 
     )
 }
-
-{/* <Route path="editor" element={<Editor
-    currentNote={findCurrentNote()}
-    updateNote={updateNote}
-/>} /> */}
 
