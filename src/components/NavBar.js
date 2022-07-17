@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigate, NavLink } from 'react-router-dom'
+import { useNavigate, NavLink } from 'react-router-dom'
 import NoteLogo from "../images/note-logo.png"
 import chevron from "../images/chevron.svg"
 import leftchev from "../images/leftchev.svg"
@@ -26,7 +26,10 @@ const NavBar = (props) => {
             <div className="appLogo">
                 {showNav ?
                     <>
-                        <img className="logo" src={NoteLogo} alt="notes app logo"></img>
+                        <img
+                            className="logo"
+                            src={NoteLogo}
+                            alt="notes app logo"></img>
                         <p>Note-ify</p>
                     </>
                     : logo

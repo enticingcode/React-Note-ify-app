@@ -7,8 +7,9 @@ import NavBar from "./components/NavBar"
 import Contact from "./components/Contact"
 import "./App.css"
 import { useNavigate, Navigate } from "react-router-dom"
-import FrontPage from "./components/FrontPage"
-
+import { SignIn } from "./components/SignIn"
+import NoMatch from "./components/NoMatch"
+import { SignUp } from "./components/SignUp"
 
 export default function App() {
 
@@ -78,58 +79,65 @@ export default function App() {
     }, [notes, currentNoteId])
 
     React.useEffect(() => {
+        isLoggedIn && navigate("home")
         console.log(isLoggedIn)
-    }, [isLoggedIn])
+    }, [isLoggedIn]);
+
 
     return (
         <main>
+            <Routes>
+                <Route path="/" element={<SignIn />} />
+                <Route path="signup" element={<SignUp />} />
+                <Route path="home" element={<Home />} />
+                <Route path="notes/*"
+                    element={<Notes
+                        notes={notes}
+                        currentNote={findCurrentNote()}
+                        setCurrentNoteId={setCurrentNoteId}
+                        newNote={createNewNote}
+                        deleteNote={deleteNote}
+                        updateNote={updateNote}
+                        setNoteTitle={setNoteTitle}
+                    />}>
+                </Route>
 
+                <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<NoMatch />} />
 
-            {isLoggedIn ?
-                <>
-                    <NavBar
-                    />
-                    <div className="content">
-                        <Routes>
-                            <Route path="/home" element={<Home />} />
-                            <Route path="/home" element={<Contact />} />
-                            <Route path="/notes"
-                                element={<Notes
-                                    notes={notes}
-                                    currentNote={findCurrentNote()}
-                                    setCurrentNoteId={setCurrentNoteId}
-                                    newNote={createNewNote}
-                                    deleteNote={deleteNote}
-                                    updateNote={updateNote}
-                                    setNoteTitle={setNoteTitle}
-                                />}>
-                                <Route path=":id" element={<Notes />} />
-                            </Route>
+            </Routes>
 
-
-
-                        </Routes>
-
-                    </div>
-
-                </>
-                :
-                <div className="content">
-                    <Routes>
-                        {/* <Route path="/" element={<Navigate to="/frontpage/login" />} /> */}
-                        <Route path="/*"
-                            element={<FrontPage
-                                isLoggedIn={isLoggedIn}
-                                setIsLoggedIn={setIsLoggedIn}
-                            />}
-                        />
-                    </Routes>
-                </div>
-
-
-            }
         </main >
 
     )
 }
 
+
+//     <>
+//         <NavBar
+//         />
+//         <div className="content">
+//             <Routes>
+//                 <Route path="/home" element={<Home />} />
+//                 <Route path="/home" element={<Contact />} />
+//                 <Route path="/notes"
+//                     element={<Notes
+//                         notes={notes}
+//                         currentNote={findCurrentNote()}
+//                         setCurrentNoteId={setCurrentNoteId}
+//                         newNote={createNewNote}
+//                         deleteNote={deleteNote}
+//                         updateNote={updateNote}
+//                         setNoteTitle={setNoteTitle}
+//                     />} />
+//                     <Route path=":id" element={<Notes />} />
+//                 </Route>
+
+
+
+//             </Routes>
+
+//         </div>
+
+//     </>
+//    
