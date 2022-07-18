@@ -57,6 +57,7 @@ export default function App() {
                 }
                 else newArray.push(oldNote);
             }
+            editSFnote(oldNote)
             return newArray
         })
     }
