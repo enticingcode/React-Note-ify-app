@@ -10,10 +10,14 @@ import { useNavigate, Navigate } from "react-router-dom"
 import { SignIn } from "./components/SignIn"
 import NoMatch from "./components/NoMatch"
 import { SignUp } from "./components/SignUp"
+import Protected from "./components/Protected"
+import { newFSnote } from "./components/UserAuth"
 
 export default function App() {
 
-    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+    const [isLoggedIn, setIsLoggedIn] = React.useState(
+        () => JSON.parse(localStorage.getItem("isLoggedIn") || true)
+    );
 
     const date = new Date().toLocaleString([], { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
 
@@ -37,6 +41,7 @@ export default function App() {
             body: "# Type your notes here!",
             timeStamp: date,
         }
+        newFSnote(newNote)
         setNotes(prevNotes => [newNote, ...prevNotes])
         setCurrentNoteId(newNote.id)
     }
@@ -74,9 +79,10 @@ export default function App() {
 
     React.useEffect(() => {
         localStorage.setItem(`notes`, JSON.stringify(notes))
-        // setNoteTitle(findCurrentNote().body)
-        // navigate(`notes/${noteTitle}`)
-    }, [notes, currentNoteId])
+        // localStorage.setItem("isLoggedIn", isLoggedIn)
+        notes.length > 0 && setNoteTitle(findCurrentNote().body)
+        notes.length > 0 && navigate(`notes/${noteTitle}`)
+    }, [notes, currentNoteId, isLoggedIn])
 
     React.useEffect(() => {
         isLoggedIn && navigate("home")
@@ -86,10 +92,19 @@ export default function App() {
 
     return (
         <main>
+            {isLoggedIn && <NavBar />}
             <Routes>
-                <Route path="/" element={<SignIn />} />
+                <Route path="/" element={
+                    <SignIn
+                        setIsLoggedin={setIsLoggedIn}
+                    />} />
                 <Route path="signup" element={<SignUp />} />
-                <Route path="home" element={<Home />} />
+
+                <Route path="home" element={
+                    <Protected isLoggedIn={isLoggedIn}>
+                        <Home />
+                    </Protected>}
+                />
                 <Route path="notes/*"
                     element={<Notes
                         notes={notes}
@@ -99,12 +114,11 @@ export default function App() {
                         deleteNote={deleteNote}
                         updateNote={updateNote}
                         setNoteTitle={setNoteTitle}
-                    />}>
-                </Route>
+                    />}
+                />
 
                 <Route path="/contact" element={<Contact />} />
                 <Route path="*" element={<NoMatch />} />
-
             </Routes>
 
         </main >

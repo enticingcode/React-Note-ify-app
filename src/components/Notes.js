@@ -49,17 +49,25 @@ export default function Notes(props) {
 
     return (
         <>
-            <section className="pane sidebar">
-                <div className="sidebar--header">
-                    <h3>Notes</h3>
-                    <button className="new-note" onClick={props.newNote}>+</button>
-                </div>
-                {noteElements}
-            </section>
-            <Editor
-                currentNote={props.currentNote}
-                updateNote={props.updateNote}
-            />
+            {props.notes.length > 0 ?
+                <>
+                    <section className="pane sidebar">
+                        <div className="sidebar--header">
+                            <button className="new-note" onClick={props.newNote}>Create Note</button>
+                            <p className="notes--text">Notes</p>
+
+                        </div>
+                        {noteElements}
+                    </section>
+                    <Editor
+                        currentNote={props.currentNote}
+                        updateNote={props.updateNote} />
+                </>
+                :
+                <button
+                    className="first--note"
+                    onClick={props.newNote}>Start Noting!</button>
+            }
         </>
     )
 }

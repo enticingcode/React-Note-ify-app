@@ -35,8 +35,9 @@ const Contact = () => {
             <h1>Reach out to us for improvement suggestions!</h1>
             <form>
                 <div className="form--inputs">
+                    <label htmlFor="firstName" >First Name</label>
                     <input type='text'
-                        placeholder="First Name"
+                        id="firstName"
                         onChange={handleChange}
                         pattern="^[a-zA-Z]+$"
                         name="firstName"
@@ -44,14 +45,18 @@ const Contact = () => {
                         required
                     >
                     </input>
+
+                    <label htmlFor="lastName" >Last Name</label>
                     <input type='text'
-                        placeholder="Last Name"
+                        id="lastName"
                         onChange={handleChange}
                         pattern="^[a-zA-Z]+$"
                         name="lastName"
                         value={inputData.lastName}
                         required
                     ></input>
+
+                    {/* <label htmlFor="firstName" >Phone:</label>
                     <input type='tel'
                         placeholder="Phone"
                         onChange={handleChange}
@@ -59,16 +64,20 @@ const Contact = () => {
                         pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                         value={inputData.phone}
                         required
-                    ></input>
+                    ></input> */}
+
+                    <label htmlFor="email" >Email</label>
                     <input type='email'
-                        placeholder="Email"
+                        id="email"
                         onChange={handleChange}
                         name="email"
                         value={inputData.email}
                         required
                     ></input>
+
+                    <label htmlFor="comments" >Comments</label>
                     <textarea
-                        placeholder="Comments"
+                        id="comments"
                         name="comments"
                         onChange={handleChange}
                         value={inputData.comments

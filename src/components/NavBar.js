@@ -47,6 +47,8 @@ const NavBar = (props) => {
                 {showNav ? "Contact" : <img src={contact} />}
             </NavLink>
 
+            <button className="">Logout</button>
+
             <div className="toggleContainer">
                 <img className={`sidebar--toggle ${showNav ? "show" : ""}`}
                     onClick={toggleSideBar} src={showNav ? leftchev : chevron} />

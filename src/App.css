@@ -26,7 +26,7 @@ button:focus {
 
 .pane {
     overflow-y: auto;
-    /* padding: 10px; */
+    padding: 0 5px;
 }
 
 .sidebar {
@@ -39,10 +39,23 @@ button:focus {
     /* display: flex; */
 }
 
+.notes--text {
+    border-top: 1px solid rgba(73, 51, 51, 0.39);
+    border-bottom: 1px solid rgba(73, 51, 51, 0.39);
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 10px 0;
+    margin-top: 10px;
+    text-indent: 10px;
+}
+
 .sidebar--header {
     display: flex;
+    margin: 30px 0;
     justify-content: space-around;
     align-items: center;
+    flex-direction: column;
+    height: 90px;
 }
 
 .sidebar--header>h3 {
@@ -51,12 +64,17 @@ button:focus {
 
 .new-note {
     cursor: pointer;
-    background-color: rgb(224, 174, 174);
+    background-color: rgb(224, 124, 99);
     border: none;
-    color: rgb(15, 12, 12);
+    color: white;
     border-radius: 3px;
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 80%;
+    padding: 10px 0;
+}
+
+.new-note:hover {
+    background-color: rgba(241, 137, 137, 0.507);
 }
 
 .first-note {
@@ -110,7 +128,7 @@ button:focus {
 }
 
 .selected-note {
-    background-color: rgb(219, 168, 168)
+    background-color: rgb(236, 231, 231);
 }
 
 .selected-note .text-snippet {
@@ -213,10 +231,12 @@ button:focus {
     display: flex;
     flex-direction: column;
     flex: 1.3;
-    background-color: rgb(224, 198, 198);
+    background-color: rgb(231, 231, 231);
     box-shadow: .3px .5px 1px 1px rgb(209, 209, 209);
     font-size: 1.5rem;
     height: 100vh;
+    max-width: 300px;
+    min-width: 250px;
 }
 
 .navbar>a {
@@ -255,6 +275,7 @@ main {
 
 .homePage {
     padding: 30px;
+    width: 100%;
 }
 
 
@@ -270,17 +291,36 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
 }
 
 .form--inputs>input,
 textarea {
     width: 200px;
     outline: none;
-    margin: 5px;
     height: 2rem;
     border-radius: 3px;
     outline: none;
     border: solid 1px rgb(185, 185, 185);
+    margin: 10px 0;
+    background-color: rgb(185, 185, 185);
+}
+
+textarea {
+    height: 100px;
+}
+
+.form--inputs>button {
+    background-color: rgb(224, 124, 99);
+    border: none;
+    height: 40px;
+    color: white;
+    border-radius: 5px;
+}
+
+.form--inputs>button:hover {
+    background-color: rgb(192, 103, 81);
+    cursor: pointer;
 }
 
 .active {
@@ -323,7 +363,7 @@ textarea {
 
 .sidebar--toggle:hover {
     transform: scale(1.5);
-
+    cursor: pointer;
 }
 
 a:visited {
@@ -336,8 +376,9 @@ input {
 }
 
 .navbar.hidden {
-    max-width: 100px;
+    max-width: 60px;
     font-size: 1.5rem;
+    min-width: 100px;
 }
 
 .sidebar-toggle.show {
@@ -347,12 +388,18 @@ input {
 .mde-text {
     border: none;
     outline: none;
+    background-color: white;
 }
 
-.mde-header .mde-tabs button {
+.react-mde-tabbed-layout {
+    margin: 50px 10px;
+}
+
+.mde-header.mde-tabs button {
     outline: none;
     color: white;
-    background-color: rgb(202, 135, 135)
+    background-color: rgb(224, 124, 99);
+    border-radius: 5px;
 }
 
 .sidebar--design {
@@ -413,7 +460,7 @@ input {
 }
 
 label {
-    margin: 14px 0;
+    margin: 4px 0;
 }
 
 
@@ -433,7 +480,29 @@ label {
     color: rgba(51, 69, 129, 0.829);
 }
 
+.first--note {
+    width: 200px;
+    height: 100px;
+    background-color: rgb(173, 93, 93);
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: white;
+}
 
+.first--note:hover {
+    background-color: rgb(199, 109, 109);
+    cursor: pointer;
+}
 
 @media screen and (max-width: 815px) {
 
